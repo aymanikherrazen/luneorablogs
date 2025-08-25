@@ -4,255 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Titre et Sous-titre - LUNÉORA</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Montserrat',sans-serif;background:#E9DCD4;padding:50px 20px}
+        .section-header{text-align:center;max-width:1200px;margin:0 auto}
+        .section-title{font-size:22px;font-weight:700;color:#000;margin-bottom:8px;position:relative;display:inline-block}
+        .section-title::after{content:'';position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);width:60px;height:4px;background:linear-gradient(90deg,#6F4E37,#B59B7B);border-radius:2px;animation:slideIn .8s ease-out .5s both}
+        .section-subtitle{color:#595959;font-size:14px;font-weight:400;max-width:600px;margin:16px auto 0;opacity:0;animation:fadeInUp .8s ease-out .3s both}
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+        @keyframes slideIn{from{transform:translateX(-50%) scaleX(0)}to{transform:translateX(-50%) scaleX(1)}}
+        .blog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1200px;margin:40px auto 0;padding:0 20px}
+        .blog-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 20px rgba(111,78,55,.1);border:1px solid rgba(111,78,55,.08);transition:all .3s cubic-bezier(.4,0,.2,1);position:relative;cursor:pointer;opacity:0;transform:translateY(30px)}
+        .blog-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,#6F4E37,#B59B7B,#C4A88A);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+        .blog-card.visible{opacity:1;transform:translateY(0);animation:fadeInUp .6s ease-out both}
+        .blog-card:nth-child(1).visible{animation-delay:.1s}
+        .blog-card:nth-child(2).visible{animation-delay:.2s}
+        .blog-card:nth-child(3).visible{animation-delay:.3s}
+        .blog-card:nth-child(4).visible{animation-delay:.4s}
+        .blog-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(111,78,55,.15);border-color:#6F4E37}
+        .blog-card:hover::before{transform:scaleX(1)}
+        .blog-image{width:100%;height:180px;object-fit:cover;transition:transform .3s ease;will-change:transform}
+        .blog-card:hover .blog-image{transform:scale(1.05)}
+        .blog-content{padding:20px}
+        .blog-title{font-size:16px;font-weight:600;color:#333;margin-bottom:8px;line-height:1.3;transition:color .3s ease}
+        .blog-card:hover .blog-title{color:#6F4E37}
+        .blog-description{font-size:13px;color:#595959;line-height:1.5;margin-bottom:12px;transition:color .3s ease}
+        .blog-card:hover .blog-description{color:#333}
+        .blog-link{color:#B59B7B;text-decoration:none;font-weight:500;font-size:13px;display:inline-flex;align-items:center;gap:5px;transition:all .3s ease;position:relative}
+        .blog-link::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:#6F4E37;transition:width .3s ease}
+        .blog-card:hover .blog-link{color:#6F4E37;transform:translateX(3px)}
+        .blog-card:hover .blog-link::after{width:100%}
+        @media (max-width:768px){
+            body{padding:30px 15px}
+            .section-title{font-size:20px}
+            .blog-grid{grid-template-columns:repeat(2,1fr);gap:12px;padding:0 10px;margin-top:30px}
+            .blog-image{height:140px}
+            .blog-content{padding:12px}
+            .blog-title{font-size:14px}
+            .blog-description{font-size:11px;margin-bottom:8px}
+            .blog-link{font-size:11px}
         }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background: #E9DCD4;
-            padding: 50px 20px;
-        }
-
-        .section-header {
-            text-align: center;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .section-title {
-            font-size: 22px;
-            font-weight: 700;
-            color: #000000;
-            margin-bottom: 8px;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: -12px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, #6F4E37, #B59B7B);
-            border-radius: 2px;
-            animation: slideIn 0.8s ease-out 0.5s both;
-        }
-
-        .section-subtitle {
-            color: #595959;
-            font-size: 14px;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 16px auto 0;
-            opacity: 0;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateX(-50%) scaleX(0);
-            }
-            to {
-                transform: translateX(-50%) scaleX(1);
-            }
-        }
-
-        /* Blog Section */
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            max-width: 1200px;
-            margin: 40px auto 0;
-            padding: 0 20px;
-        }
-
-        .blog-card {
-            background: #ffffff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(111, 78, 55, 0.1);
-            border: 1px solid rgba(111, 78, 55, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .blog-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #6F4E37, #B59B7B, #C4A88A);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease;
-        }
-
-        .blog-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-            animation: fadeInUp 0.6s ease-out both;
-        }
-
-        .blog-card:nth-child(1).visible {
-            animation-delay: 0.1s;
-        }
-
-        .blog-card:nth-child(2).visible {
-            animation-delay: 0.2s;
-        }
-
-        .blog-card:nth-child(3).visible {
-            animation-delay: 0.3s;
-        }
-
-        .blog-card:nth-child(4).visible {
-            animation-delay: 0.4s;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px rgba(111, 78, 55, 0.15);
-            border-color: #6F4E37;
-        }
-
-        .blog-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .blog-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .blog-card:hover .blog-image {
-            transform: scale(1.05);
-        }
-
-        .blog-content {
-            padding: 20px;
-        }
-
-        .blog-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #333333;
-            margin-bottom: 8px;
-            line-height: 1.3;
-            transition: color 0.3s ease;
-        }
-
-        .blog-card:hover .blog-title {
-            color: #6F4E37;
-        }
-
-        .blog-description {
-            font-size: 13px;
-            color: #595959;
-            line-height: 1.5;
-            margin-bottom: 12px;
-            transition: color 0.3s ease;
-        }
-
-        .blog-card:hover .blog-description {
-            color: #333333;
-        }
-
-        .blog-link {
-            color: #B59B7B;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 13px;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .blog-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: #6F4E37;
-            transition: width 0.3s ease;
-        }
-
-        .blog-card:hover .blog-link {
-            color: #6F4E37;
-            transform: translateX(3px);
-        }
-
-        .blog-card:hover .blog-link::after {
-            width: 100%;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .blog-grid {
-                gap: 16px;
-                padding: 0 16px;
-            }
-            
-            .blog-image {
-                height: 160px;
-            }
-            
-            .blog-content {
-                padding: 16px;
-            }
-            
-            .blog-title {
-                font-size: 15px;
-            }
-            
-            .blog-description {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .blog-grid {
-                gap: 12px;
-                padding: 0 12px;
-            }
-            
-            .blog-image {
-                height: 140px;
-            }
-            
-            .blog-content {
-                padding: 14px;
-            }
+        @media (max-width:480px){
+            body{padding:20px 8px}
+            .section-title{font-size:18px}
+            .blog-grid{gap:10px;padding:0 8px}
+            .blog-image{height:120px}
+            .blog-content{padding:10px}
+            .blog-title{font-size:13px}
+            .blog-description{font-size:10px;margin-bottom:6px}
+            .blog-link{font-size:10px}
         }
     </style>
 </head>
@@ -261,82 +64,43 @@
         <h2 class="section-title">Nos Astuces Beauté</h2>
         <p class="section-subtitle">Découvrez des conseils simples, naturels et efficaces pour prendre soin de votre peau au quotidien.</p>
     </div>
-
     <div class="blog-grid">
         <article class="blog-card">
-            <img src="https://cdn.youcan.shop/stores/c795db5cea64aae47157edb49a145ffe/others/4mvEX0jfItj98XcJxUmwRACI4bnUm86MrYlujZqA.png" 
-                 alt="Guide cheveux" 
-                 class="blog-image">
+            <img src="https://i.postimg.cc/G3kJzbhC/clipboard-image-1756088621.webp" alt="Guide cheveux" class="blog-image" loading="lazy" decoding="async">
             <div class="blog-content">
                 <h3 class="blog-title">Identifier son type de cheveux</h3>
                 <p class="blog-description">Comprendre la nature de vos cheveux est essentiel pour adopter une routine efficace.</p>
-                <a href="#" class="blog-link">Lire l'article →</a>
+                <a href="/pages/identifier-son-type-de-cheveux-guide-and-conseils-luneora" class="blog-link" target="_top">Lire l'article →</a>
             </div>
         </article>
-
         <article class="blog-card">
-            <img src="https://cdn.youcan.shop/stores/c795db5cea64aae47157edb49a145ffe/others/3tQQynSImKzcC0v8IPvSkSEJDrculI0FDSo8vqLc.jpg" 
-                 alt="Hydratation peau" 
-                 class="blog-image">
+            <img src="https://i.postimg.cc/2yFQ57X6/clipboard-image-1756088645.webp" alt="Hydratation peau" class="blog-image" loading="lazy" decoding="async">
             <div class="blog-content">
                 <h3 class="blog-title">5 astuces pour hydrater naturellement</h3>
                 <p class="blog-description">Découvrez des méthodes simples et naturelles pour maintenir l'hydratation de votre peau.</p>
-                <a href="#" class="blog-link">Lire l'article →</a>
+                <a href="#" class="blog-link" target="_top">Lire l'article →</a>
             </div>
         </article>
-
         <article class="blog-card">
-            <img src="https://cdn.youcan.shop/stores/c795db5cea64aae47157edb49a145ffe/others/7WDXYVD8VBOvSAvinidEwP2RulSHDm6diCKjpmd7.png" 
-                 alt="Routine visage" 
-                 class="blog-image">
+            <img src="https://i.postimg.cc/Kjy7FHfw/image-2025-08-25-032431986.webp" alt="Routine visage" class="blog-image" loading="lazy" decoding="async">
             <div class="blog-content">
                 <h3 class="blog-title">Routine visage naturelle en 3 étapes</h3>
                 <p class="blog-description">Une routine simple à base de soins LUNÉORA pour un teint frais et équilibré.</p>
-                <a href="#" class="blog-link">Lire l'article →</a>
+                <a href="#" class="blog-link" target="_top">Lire l'article →</a>
             </div>
         </article>
-
         <article class="blog-card">
-            <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=400&h=300&fit=crop&crop=center" 
-                 alt="Soins naturels" 
-                 class="blog-image">
+            <img src="https://i.postimg.cc/RFSb9q0w/image-2025-08-25-032140143.webp" alt="Soins naturels" class="blog-image" loading="lazy" decoding="async">
             <div class="blog-content">
                 <h3 class="blog-title">Les bienfaits des soins naturels</h3>
                 <p class="blog-description">Pourquoi choisir des produits naturels pour votre routine beauté quotidienne.</p>
-                <a href="#" class="blog-link">Lire l'article →</a>
+                <a href="#" class="blog-link" target="_top">Lire l'article →</a>
             </div>
         </article>
     </div>
-
     <script>
-        // Intersection Observer for blog cards
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        // Observe all blog cards
-        const blogCards = document.querySelectorAll('.blog-card');
-        blogCards.forEach(card => {
-            observer.observe(card);
-        });
-
-        // Add click functionality
-        blogCards.forEach(card => {
-            card.addEventListener('click', function() {
-                const link = this.querySelector('.blog-link');
-                if (link && link.href !== '#') {
-                    window.location.href = link.href;
-                }
-            });
-        });
+        const o=new IntersectionObserver(e=>{e.forEach(n=>{n.isIntersecting&&(n.target.classList.add('visible'),o.unobserve(n.target))})},{threshold:.1,rootMargin:'0px 0px -50px 0px'});
+        document.querySelectorAll('.blog-card').forEach(c=>{o.observe(c);c.onclick=()=>{const l=c.querySelector('.blog-link');l&&l.href!=='#'&&(location.href=l.href)}});
     </script>
 </body>
 </html>
